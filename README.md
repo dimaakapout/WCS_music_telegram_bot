@@ -15,9 +15,9 @@ Music bot in telegram for West coast swing training
 
 **-- bot.py**  (исполняемый файл)
 
-**-- database **  (база данных)
+**-- database**  (база данных)
 
 **-- requirements.txt**  (библиотеки)
 
-**-- sms.txt **    (сообщения от бота)
+**-- sms.txt**    (сообщения от бота)
 
