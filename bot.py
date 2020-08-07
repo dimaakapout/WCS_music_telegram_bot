@@ -77,26 +77,12 @@ def get_track_list(genre, tracks):
         tracks = func(n) 
     
         return tracks['link'].values
+ 
+with open('sms.txt', encoding='utf-8')as f: # Читаем сообщения бота
+    start, help_message = f.read().split('|') # | для разделения сообщений 
 
-start_message = '''
-Привет, *{0}* \u270c\ufe0f! 
-Этот бот умеет подбирать WCS музыку
-*по скорости* и *жанру*. 
-Следуй моим инструкциям''' + '''
-и удачного сампо \u270c\ufe0f!
-'''
-
-help_message = '''
-*Подписывайся на канал* 
-
-==>   @WCSmusicSAMPO   <==
-
-*Есть идеи как улучшить бота?!*
-
-Пиши на ...@mail.ru
-'''
-
-TOKEN = '1350Cw'
+with open('token.txt') as f:
+    TOKEN = f.read()
 
 SALUTATION_ROW = ('/start', '/help')
 
@@ -110,7 +96,7 @@ TEXT_BPM = FIRST_ROW_BPM_CHOICE + SECOND_ROW_BPM_CHOICE
 TEXT_GENRE = FIRST_ROW_GENRE_CHOICE + SECOND_ROW_GENRE_CHOICE
 
 
-    
+# Инициализация клавиатуры    
 keyboardChoiceBpm = telebot.types.ReplyKeyboardMarkup(True)
 keyboardChoiceBpm.row(*FIRST_ROW_BPM_CHOICE)
 keyboardChoiceBpm.row(*SECOND_ROW_BPM_CHOICE)
@@ -124,21 +110,25 @@ keyboardChoiceGenre.row(*SALUTATION_ROW)
 itunes = playlist.sample(10)['link'].values #Заглушка
 select_bpm = '80-90'
 
-bot = telebot.TeleBot(TOKEN) #не забывать перезапускать для обновления бота
+bot = telebot.TeleBot(TOKEN) 
 
-
-## START
+  
+## START 
 @bot.message_handler(commands=['start'])
 def start_message(message):
-    bot.send_message(message.chat.id, 'start_message')#, parse_mode='Markdown')
-    bot.send_message(message.chat.id, 'Выбери скорость', reply_markup=keyboardChoiceBpm) 
+    bot.send_message(message.chat.id, start.format(message.chat.first_name, '\u270c\ufe0f'),
+                     parse_mode='Markdown')
+    bot.send_message(message.chat.id, '`ВЫБЕРИ СКОРОСТЬ`',
+                     parse_mode='Markdown',
+                     reply_markup=keyboardChoiceBpm) 
 
     
 ## HELP
 @bot.message_handler(commands=['help'])  
 def help_command(message):
 
-    bot.send_message(message.chat.id, help_message, parse_mode='Markdown', reply_markup=keyboardChoiceBpm)
+    bot.send_message(message.chat.id, help_message, 
+                     parse_mode='Markdown')
 
 # MAIN
 @bot.message_handler(content_types=['text'])
@@ -147,17 +137,20 @@ def get_text_messages(message):
     if message.text in TEXT_BPM:
         global select_bpm
         select_bpm = message.text
-        bot.send_message(message.chat.id, 'Выбери скорость', reply_markup=keyboardChoiceGenre) 
+        bot.send_message(message.chat.id, r'`ВЫБЕРИ ЖАНР`',
+                         parse_mode='Markdown',
+                         reply_markup=keyboardChoiceGenre) 
         
     if message.text in TEXT_GENRE:
         itunes = get_track_list(message.text, get_track_dataframe(select_bpm))
-        bot.send_message(message.chat.id, 'лови', reply_markup=keyboardChoiceBpm) 
+        bot.send_message(message.chat.id, 'Лови',
+                         reply_markup=keyboardChoiceBpm) 
         for i in itunes:
             bot.send_audio(message.from_user.id, i)
     
-    if message.text == 'секретик':
+    if message.text == 'секретик' or message.text == 'Секретик':
         sticers = bot.get_sticker_set('Hot_Cherry')
         sticer_id = sticers.stickers[1].file_id
         bot.send_sticker(message.chat.id, sticer_id)
-
+        
 bot.polling(none_stop=True, interval=0)
