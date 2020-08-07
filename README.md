@@ -22,3 +22,6 @@ Music bot in telegram for West coast swing training
 
 **-- sms.txt**    (сообщения от бота)
 
+**-- token.txt**    (токен)
+
+
