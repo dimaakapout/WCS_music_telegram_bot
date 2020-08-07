@@ -12,7 +12,12 @@ Music bot in telegram for West coast swing training
 
 
 ### Структура проекта
+
 **-- bot.py**  (исполняемый файл)
+
 **-- database **  (база данных)
+
 **-- requirements.txt**  (библиотеки)
+
 **-- sms.txt **    (сообщения от бота)
+
