@@ -155,10 +155,5 @@ def get_text_messages(message):
                          reply_markup=keyboardChoiceBpm) 
         for i in itunes:
             bot.send_audio(message.from_user.id, i)
-    
-    if message.text == 'секретик' or message.text == 'Секретик':
-        sticers = bot.get_sticker_set('Hot_Cherry')
-        sticer_id = sticers.stickers[1].file_id
-        bot.send_sticker(message.chat.id, sticer_id)
         
 bot.polling(none_stop=True, interval=0)
