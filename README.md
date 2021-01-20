@@ -16,7 +16,7 @@ Music bot in telegram for West coast swing training
 
 `git clone https://github.com/dimaakapout/WCS_music_telegram_bot`
 
-`mkdir src_bot # Каталог с базой данных`
+`mkdir src_bot`
 
 `docker build -t bot_app .`
 
@@ -28,9 +28,9 @@ Music bot in telegram for West coast swing training
 
 **-- bot.py**  (исполняемый файл)
 
-**-- database**  (база данных)
+**-- ./src/database.xlsx**  (база c ссылками на аудиофайлы)
 
-**-- requirements.txt**  (библиотеки)
+**-- requirements.txt** 
 
 **-- sms.txt**    (сообщения от бота)
 
