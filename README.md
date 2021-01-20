@@ -11,6 +11,11 @@ Music bot in telegram for West coast swing training
 
 ------------
 
+### Установка и запуск
+
+`git clone https://github.com/dimaakapout/WCS_music_telegram_bot`
+``
+
 
 ### Структура проекта
 
