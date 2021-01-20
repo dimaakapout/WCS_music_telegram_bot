@@ -12,9 +12,11 @@ Music bot in telegram for West coast swing training
 ------------
 
 ### Установка и запуск
-
+`cd /home/`
 `git clone https://github.com/dimaakapout/WCS_music_telegram_bot`
-``
+`mkdir src_bot # Каталог с базой данных`
+`docker build -t bot_app .`
+`docker run --name bot --restart=always -d -v /home/src_bot:/bot/src bot_app`
 
 
 ### Структура проекта
