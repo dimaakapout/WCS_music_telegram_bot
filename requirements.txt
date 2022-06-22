@@ -1,4 +1,4 @@
 pytelegrambotapi==3.7.2
-numpy==1.16.2
+numpy==1.22.0
 pandas==0.25.1
 xlrd==1.2.0
